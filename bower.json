@@ -2,9 +2,9 @@
   "name": "swiss-nuclear-exit",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.4.0",
+    "angular": "latest",
     "bootstrap": "^3.2.0",
-    "angular-route": "^1.4.0"
+    "angular-google-chart": "^0.1.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

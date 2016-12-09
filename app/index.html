@@ -1,3 +1,4 @@
+<script src="scripts/controllers/renewables_energies.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +32,7 @@
 
 </head>
 
-<body>
+<body ng-app="swissNuclearExitApp">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -70,27 +71,22 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>A Bootstrap Starter Template</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!!</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.7</li>
-                    <li>jQuery v1.11.1</li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
+      <div ng-controller="RenewablesEnergiesCtrl">
+        <div google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
+      </div>
     </div>
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-google-chart/ng-google-chart.min.js"></script>
     <script src="../bower_components/jquery/dist/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Custom scripts -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/renewables_energies.js"></script>
 
 </body>
 
