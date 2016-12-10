@@ -8,8 +8,6 @@
  *
  * Main module of the application.
  */
-angular
-  .module('swissNuclearExitApp', [
+angular.module('swissNuclearExitApp', [
     'googlechart'
   ]);
-
