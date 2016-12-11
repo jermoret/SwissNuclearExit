@@ -9,5 +9,6 @@
  * Main module of the application.
  */
 angular.module('swissNuclearExitApp', [
-    'googlechart'
+    'googlechart',
+    'ui.toggle'
   ]);

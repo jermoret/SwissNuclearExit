@@ -3,90 +3,234 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>SwissNuclearExit</title>
+  <title>SwissNuclearExit</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS -->
+  <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles/main.css" rel="stylesheet">
+  <link href="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <style>
+  <!-- Custom CSS -->
+  <style>
     body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+      padding-top: 70px;
+      /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
-    </style>
+  </style>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
 </head>
 
 <body ng-app="swissNuclearExitApp">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">SwissNuclearExit</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Problem</a>
-                    </li>
-                    <li>
-                        <a href="#">Solution 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Solution 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Solution 3</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">SwissNuclearExit</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <span class="navbar-element"><span class="label label-danger label-as-badge">0</span> shutdowned nuclear central(s)</span>
+        </li>
+        <li>
+          <span class="navbar-element">Deficiency ratio : -22,252 GWh</span>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
 
-    <!-- Page Content -->
-    <div class="container">
-      <h1>Problem : Nuclear electricity</h1>
-      <div ng-controller="RenewablesEnergiesCtrl">
-        <div google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
+<!-- Page Content -->
+<div class="container">
+
+  <h1>Nuclear electricity</h1>
+  <div class="row nuclear_panel">
+    <div class="col-md-2 col-md-offset-1 nuclear_central_container">
+      <img src="images/nuclear_central.png" alt="Beznau_1" width="96" height="120">
+      <h3>Beznau I</h3>
+      <h4>1969</h4>
+      <h5>365 MWe</h5>
+      <toggle ng-model="toggleBeznau1" ng-change="changed()" style="android"></toggle>
+    </div>
+    <div class="col-md-2 nuclear_central_container">
+      <img src="images/nuclear_central.png" alt="Beznau_2" width="96" height="120">
+      <h3>Beznau II</h3>
+      <h4>1971</h4>
+      <h5>365 MWe</h5>
+      <toggle ng-model="toggleBeznau2" ng-change="changed()" style="android"></toggle>
+    </div>
+    <div class="col-md-2 nuclear_central_container">
+      <img src="images/nuclear_central.png" alt="Muhleberg" width="96" height="120">
+      <h3>Mühleberg</h3>
+      <h4>1972</h4>
+      <h5>373 MWe</h5>
+      <toggle ng-model="toggleMuhleberg" ng-change="changed()" style="android"></toggle>
+    </div>
+    <div class="col-md-2 nuclear_central_container">
+      <img src="images/nuclear_central.png" alt="Gosgen" width="96" height="120">
+      <h3>Gösgen</h3>
+      <h4>1979</h4>
+      <h5>570 MWe</h5>
+      <toggle ng-model="toggleGosgen" ng-change="changed()" style="android"></toggle>
+    </div>
+    <div class="col-md-2 nuclear_central_container">
+      <img src="images/nuclear_central.png" alt="Leibstadt" width="96" height="120">
+      <h3>Leibstadt</h3>
+      <h4>1984</h4>
+      <h5>1165 MWe</h5>
+      <toggle ng-model="toggleLeibstadt" ng-change="changed()" style="android"></toggle>
+    </div>
+  </div>
+
+  <h1>New renewables energies</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h3><span class="my-icon swiss_flag normal"></span> Part of renewables</h3>
+    </div>
+    <div class="col-md-6">
+      <h3><span class="my-icon eu_flag normal"></span> Part of renewables</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="inline-headers">
+        <h3>Wind strategy</h3>
+        <h5>covers <strong>25%</strong> of the deficiency (3543 GWh)</h5>
       </div>
     </div>
-    <!-- /.container -->
+  </div>
 
-    <!-- jQuery Version 1.11.1 -->
-    <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../bower_components/angular-google-chart/ng-google-chart.min.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <div class="row">
+    <div class="col-md-2">
+      <img src="images/wind_turbine.png" alt="Wind turbine" height="175" width="146">
+    </div>
+    <div class="col-md-3 height-align">
+      <div class="v-m">
+        <h1 align="center">10,000,000</h1>
+        <h5 align="center">of 2 MW</h5>
+      </div>
+    </div>
+    <div class="col-md-7 height-align">
+      <div class="v-m">
+        <h4>Some stats</h4>
+        <p>The confederation's target for 2050 is 7% of consumption or 4000 GWh.</p>
+        <p>The intermediate objective of confederation for 2020 is 600 GWh.</p>
+        <p>A standard wind turbine (2 to 3 MW) supplies 1000 to 1,700 Swiss households.</p>
+      </div>
+    </div>
+  </div>
 
-    <!-- Custom scripts -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/renewables_energies.js"></script>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="inline-headers">
+        <h3>Solar strategy</h3>
+        <h5>covers <strong>25%</strong> of the deficiency (3543 GWh)</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <img src="images/solar.jpg" alt="Wind turbine" height="175" width="166">
+    </div>
+    <div class="col-md-3 height-align">
+      <div class="v-m">
+        <h1 align="center">25,000,000</h1>
+        <h5 align="center">of m<sup>2</sup></h5>
+      </div>
+    </div>
+    <div class="col-md-7 height-align">
+      <div class="v-m">
+        <h4>Some stats</h4>
+        <p>25 m<sup>2</sup> cover the needs of a Swiss household.</p>
+        <p>10,000 CHF the 25 m<sup>2</sup>.</p>
+        <p>Lifetime > 30 years.</p>
+      </div>
+    </div>
+  </div>
+
+  <h1>Households consumption</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h3><span class="my-icon swiss_flag normal"></span> Total households consumption</h3>
+    </div>
+    <div class="col-md-6">
+      <h3><span class="my-icon eu_flag normal"></span> Consumption per household</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="inline-headers">
+        <h3>Strategy</h3>
+        <h5>covers <strong>25%</strong> of the deficiency (3543 GWh)</h5>
+      </div>
+    </div>
+  </div>
+  <h4>A reduction of 200 kWh per household.</h4>
+
+  <h1>Imports / exports</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h3><span class="my-icon swiss_flag normal"></span> Imports / exports ratio by season</h3>
+    </div>
+    <div class="col-md-6">
+      <h3><span class="my-icon eu_flag normal"></span> Imports / exports ratio by year</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="inline-headers">
+        <h3>Strategy</h3>
+        <h5>covers <strong>25%</strong> of the deficiency (3543 GWh)</h5>
+      </div>
+    </div>
+  </div>
+
+  <h4>Increase winter's imports by 5%</h4>
+  <h4>Reduce summer's exports by 5%</h4>
+
+</div>
+<!-- /.container -->
+
+<!-- jQuery Version 1.11.1 -->
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="../bower_components/angular-google-chart/ng-google-chart.min.js"></script>
+<script src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Custom scripts -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/renewables_energies.js"></script>
 </body>
 
 </html>
