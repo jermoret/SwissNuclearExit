@@ -1,0 +1,283 @@
+{
+	"european_statistics_2012":
+	[
+		{
+			"country": "Swiss",
+			"production_GWh":
+			{
+				"non_renewable": 25948,
+				"geothermal": 0,
+				"hydraulic": 37190,
+				"solar": 1118,
+				"biomass_biogaz": 409,
+				"wind": 110,
+				"wastes": 1192
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 18287,
+				"nbr_households": 3400000,
+				"comsumption_by_households_kWh": 5378.529412
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 37438,
+				"export": 42929,
+				"sold": -5491
+			}
+		},
+		{
+			"country": "Germany",
+			"production_GWh":
+			{
+				"non_renewable": 425628,
+				"geothermal": 98,
+				"hydraulic": 24899,
+				"solar": 35115,
+				"biomass_biogaz": 42785,
+				"wind": 57357,
+				"wastes": 6069
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 129593.09,
+				"nbr_households": 40100000,
+				"comsumption_by_households_kWh": 3231.74788
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 40435,
+				"export": 74320,
+				"sold": -33885
+			}
+		},
+		{
+			"country": "Italy",
+			"production_GWh":
+			{
+				"non_renewable": 152515,
+				"geothermal": 5916,
+				"hydraulic": 58842,
+				"solar": 22306,
+				"biomass_biogaz": 12021,
+				"wind": 15178,
+				"wastes": 2370
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 64244.12,
+				"nbr_households": 23800000,
+				"comsumption_by_households_kWh": 2699.332773
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 46747,
+				"export": 3031,
+				"sold": 43716
+			}
+		},
+		{
+			"country": "France",
+			"production_GWh":
+			{
+				"non_renewable": 444299,
+				"geothermal": 83,
+				"hydraulic": 66965,
+				"solar": 5905,
+				"biomass_biogaz": 3091,
+				"wind": 17249,
+				"wastes": 1824
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 149422.24,
+				"nbr_households": 23800000,
+				"comsumption_by_households_kWh": 6278.245378
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 7873,
+				"export": 75063,
+				"sold": -67190
+			}
+		},
+		{
+			"country": "Austria",
+			"production_GWh":
+			{
+				"non_renewable": 11204,
+				"geothermal": 0.4,
+				"hydraulic": 42166,
+				"solar": 785,
+				"biomass_biogaz": 4052,
+				"wind": 3846,
+				"wastes": 285
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 17433.37,
+				"nbr_households": 3600000,
+				"comsumption_by_households_kWh": 4842.602778
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 26712,
+				"export": 17437,
+				"sold": 9275
+			}
+		},
+		{
+			"country": "Denmark",
+			"production_GWh":
+			{
+				"non_renewable": 12785,
+				"geothermal": 0,
+				"hydraulic": 15,
+				"solar": 596,
+				"biomass_biogaz": 3454,
+				"wind": 13079,
+				"wastes": 885
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 10094.84,
+				"nbr_households": 2500000,
+				"comsumption_by_households_kWh": 4037.936
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 12702,
+				"export": 9847,
+				"sold": 2855
+			}
+		},
+		{
+			"country": "Sweden",
+			"production_GWh":
+			{
+				"non_renewable": 64635,
+				"geothermal": 0,
+				"hydraulic": 63323,
+				"solar": 47,
+				"biomass_biogaz": 9091,
+				"wind": 11234,
+				"wastes": 1626
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 36820.58,
+				"nbr_households": 4600000,
+				"comsumption_by_households_kWh": 8004.473913
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 13852,
+				"export": 3655,
+				"sold": 10197
+			}
+		},
+		{
+			"country": "Spain",
+			"production_GWh":
+			{
+				"non_renewable": 160220,
+				"geothermal": 0,
+				"hydraulic": 42519,
+				"solar": 8218,
+				"biomass_biogaz": 4728,
+				"wind": 52013,
+				"wastes": 682
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 70710.4,
+				"nbr_households": 16700000,
+				"comsumption_by_households_kWh": 4234.155689
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 12310,
+				"export": 15716,
+				"sold": -3406
+			}
+		},
+		{
+			"country": "Belgium",
+			"production_GWh":
+			{
+				"non_renewable": 56662,
+				"geothermal": 0,
+				"hydraulic": 1496,
+				"solar": 2883,
+				"biomass_biogaz": 3501,
+				"wind": 4614,
+				"wastes": 809
+			},
+			"comsumption":
+			{
+				"households_comsumption_GWh": 18941.781,
+				"nbr_households": 4600000,
+				"comsumption_by_households_kWh": 4117.778478
+			},
+			"import_export_sold_GWh":
+			{
+				"import": 21791,
+				"export": 4188,
+				"sold": 17603
+			}
+		}
+	],
+
+	"swiss_import_export_GWh":
+	{
+		"summer_import": 17291,
+		"winter_import": 20147,
+		"summer_export": 23449,
+		"winter_export": 19480
+	},
+
+	"renewables_energies":
+	{
+		"solar":
+		{
+			"unit": "25 m2",
+			"annual_production_kWh": 4000
+		},
+		"wind":
+		{
+			"unit": "unité",
+			"annual_production_kWh": 4000000
+		}
+	},
+
+	"swiss_households_consumption_GWh":
+	[
+		{"year": "1989", "consumption": 12875},
+		{"year": "1988", "consumption": 12668},
+		{"year": "1990", "consumption": 13213},
+		{"year": "1991", "consumption": 13848},
+		{"year": "1992", "consumption": 14166},
+		{"year": "1993", "consumption": 14172},
+		{"year": "1994", "consumption": 14193},
+		{"year": "1995", "consumption": 14680},
+		{"year": "1996", "consumption": 15271},
+		{"year": "1997", "consumption": 14859},
+		{"year": "1998", "consumption": 15122},
+		{"year": "1999", "consumption": 15558},
+		{"year": "2000", "consumption": 15727},
+		{"year": "2001", "consumption": 16080},
+		{"year": "2002", "consumption": 16291},
+		{"year": "2003", "consumption": 16679},
+		{"year": "2004", "consumption": 17114},
+		{"year": "2005", "consumption": 17624},
+		{"year": "2006", "consumption": 17702},
+		{"year": "2007", "consumption": 17472},
+		{"year": "2008", "consumption": 17897},
+		{"year": "2009", "consumption": 17920},
+		{"year": "2010", "consumption": 18618},
+		{"year": "2011", "consumption": 17942},
+		{"year": "2012", "consumption": 18333},
+		{"year": "2013", "consumption": 18768},
+		{"year": "2014", "consumption": 18287}
+	]
+}
