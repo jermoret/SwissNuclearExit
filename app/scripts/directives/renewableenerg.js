@@ -10,7 +10,7 @@ angular.module('swissNuclearExitApp')
   .directive('renewableEnerg', function(){
     return {
       restrict: 'E',
-      templateUrl: 'templates/renewableEnergies.html',
+      template: '<div google-chart chart="myChartObject" style="height:600px; width:100%;"></div>',
       link: function postLink(scope) {
         scope.myChartObject = {};
 
