@@ -33,7 +33,7 @@
 
 </head>
 
-<body ng-app="swissNuclearExitApp">
+<body ng-app="swissNuclearExitApp" ng-controller="ControllerCtrl">
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -52,10 +52,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
-          <span class="navbar-element"><span class="label label-danger label-as-badge">0</span> shutdowned nuclear central(s)</span>
+          <span class="navbar-element"><span class="label label-danger label-as-badge">{{nbrShutdownedCentral}}</span> shutdowned nuclear central(s)</span>
         </li>
         <li>
-          <span class="navbar-element">Deficiency ratio : -22,252 GWh</span>
+          <span class="navbar-element">Deficiency ratio : {{deficiencyRatio}} GWh</span>
         </li>
       </ul>
     </div>
@@ -67,44 +67,44 @@
 <!-- Page Content -->
 <div class="container">
 
-  <renewable-energ></renewable-energ>
+  <!--<renewable-energ></renewable-energ>-->
 
   <h1>Nuclear electricity</h1>
   <div class="row nuclear_panel">
     <div class="col-md-2 col-md-offset-1 nuclear_central_container">
-      <img src="images/nuclear_central.png" alt="Beznau_1" width="96" height="120">
-      <h3>Beznau I</h3>
-      <h4>1969</h4>
-      <h5>365 MWe</h5>
-      <toggle ng-model="toggleBeznau1" ng-change="changed()" style="android"></toggle>
+      <img src="images/nuclear_central.png" alt="{{centrals[0].name}}" width="96" height="120">
+      <h3>{{centrals[0].name}}</h3>
+      <h4>{{centrals[0].construction_date}}</h4>
+      <h5>{{centrals[0].net_power_mwe}} MWe</h5>
+      <toggle ng-model="toggle[0]" ng-change="toggleChanged(0)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
-      <img src="images/nuclear_central.png" alt="Beznau_2" width="96" height="120">
-      <h3>Beznau II</h3>
-      <h4>1971</h4>
-      <h5>365 MWe</h5>
-      <toggle ng-model="toggleBeznau2" ng-change="changed()" style="android"></toggle>
+      <img src="images/nuclear_central.png" alt="{{centrals[1].name}}" width="96" height="120">
+      <h3>{{centrals[1].name}}</h3>
+      <h4>{{centrals[1].construction_date}}</h4>
+      <h5>{{centrals[1].net_power_mwe}} MWe</h5>
+      <toggle ng-model="toggle[1]" ng-change="toggleChanged(1)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
-      <img src="images/nuclear_central.png" alt="Muhleberg" width="96" height="120">
-      <h3>Mühleberg</h3>
-      <h4>1972</h4>
-      <h5>373 MWe</h5>
-      <toggle ng-model="toggleMuhleberg" ng-change="changed()" style="android"></toggle>
+      <img src="images/nuclear_central.png" alt="{{centrals[2].name}}" width="96" height="120">
+      <h3>{{centrals[2].name}}</h3>
+      <h4>{{centrals[2].construction_date}}</h4>
+      <h5>{{centrals[2].net_power_mwe}} MWe</h5>
+      <toggle ng-model="toggle[2]" ng-change="toggleChanged(2)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
-      <img src="images/nuclear_central.png" alt="Gosgen" width="96" height="120">
-      <h3>Gösgen</h3>
-      <h4>1979</h4>
-      <h5>570 MWe</h5>
-      <toggle ng-model="toggleGosgen" ng-change="changed()" style="android"></toggle>
+      <img src="images/nuclear_central.png" alt="{{centrals[3].name}}" width="96" height="120">
+      <h3>{{centrals[3].name}}</h3>
+      <h4>{{centrals[3].construction_date}}</h4>
+      <h5>{{centrals[3].net_power_mwe}} MWe</h5>
+      <toggle ng-model="toggle[3]" ng-change="toggleChanged(3)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
-      <img src="images/nuclear_central.png" alt="Leibstadt" width="96" height="120">
-      <h3>Leibstadt</h3>
-      <h4>1984</h4>
-      <h5>1165 MWe</h5>
-      <toggle ng-model="toggleLeibstadt" ng-change="changed()" style="android"></toggle>
+      <img src="images/nuclear_central.png" alt="{{centrals[4].name}}" width="96" height="120">
+      <h3>{{centrals[4].name}}</h3>
+      <h4>{{centrals[4].construction_date}}</h4>
+      <h5>{{centrals[4].net_power_mwe}} MWe</h5>
+      <toggle ng-model="toggle[4]" ng-change="toggleChanged(4)" style="android"></toggle>
     </div>
   </div>
 
@@ -233,6 +233,8 @@
 <!-- Custom scripts -->
 <script src="scripts/app.js"></script>
 <script src="scripts/directives/renewableenerg.js"></script>
+<script src="scripts/controllers/controller.js"></script>
+<script src="scripts/directives/nuclearcentral.js"></script>
 
 </body>
 
