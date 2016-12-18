@@ -5,7 +5,7 @@
 			"country": "Swiss",
 			"production_GWh":
 			{
-				"non_renewable": 25948,
+				"non_renewable": 28817,
 				"geothermal": 0,
 				"hydraulic": 37190,
 				"solar": 1118,
@@ -240,13 +240,13 @@
 	{
 		"solar":
 		{
-			"unit": "25 m2",
-			"annual_production_kWh": 4000
+			"unit": "m2",
+			"annual_production_kWh": 160
 		},
 		"wind":
 		{
-			"unit": "unité",
-			"annual_production_kWh": 4000000
+			"unit": "unit",
+			"annual_production_kWh": 6800000
 		}
 	},
 
