@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
-          <span class="navbar-element"><span class="label label-danger label-as-badge">{{nbrShutdownedCentral}}</span> shutdowned nuclear central(s)</span>
+          <span class="navbar-element"><span class="label label-as-badge label-primary">{{nbrShutdownedCentral}}</span> shutdowned nuclear central(s)</span>
         </li>
         <li>
           <span class="navbar-element">Deficiency ratio : {{deficiencyRatio}} GWh</span>
@@ -112,9 +112,18 @@
   <div class="row">
     <div class="col-md-6">
       <h3><span class="my-icon swiss_flag normal"></span> Part of renewables</h3>
+        <canvas id="pie" class="chart chart-pie" chart-data="renew_pie_data"
+                chart-labels="renew_pie_labels" chart-options="renew_pie_options"
+                height="200" chart-colors="default_colors">
+        </canvas>
     </div>
     <div class="col-md-6">
       <h3><span class="my-icon eu_flag normal"></span> Part of renewables</h3>
+      <canvas id="bar" class="chart chart-bar"
+              chart-data="renew_bar_data" chart-labels="renew_bar_labels"
+              chart-series="renew_bar_series" chart-options="renew_bar_options"
+              height="200" chart-colors="default_colors" chart-dataset-override="renew_bar_over">
+      </canvas>
     </div>
   </div>
 
@@ -225,6 +234,8 @@
 <script src="../bower_components/angular/angular.min.js"></script>
 <script src="../bower_components/angular-google-chart/ng-google-chart.min.js"></script>
 <script src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
+<script src="../bower_components/chart.js/dist/Chart.min.js"></script>
+<script src="../bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->

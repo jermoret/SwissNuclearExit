@@ -10,5 +10,6 @@
  */
 angular.module('swissNuclearExitApp', [
   'googlechart',
-  'ui.toggle'
+  'ui.toggle',
+  'chart.js'
 ]);
