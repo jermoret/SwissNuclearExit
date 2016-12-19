@@ -55,7 +55,7 @@
           <span class="navbar-element"><span class="label label-as-badge label-primary">{{nbrShutdownedCentral}}</span> shutdowned nuclear central(s)</span>
         </li>
         <li>
-          <span class="navbar-element">Deficiency ratio : {{generalDeficiencyRatio.toFixed(0)}} GWh</span>
+          <span class="navbar-element">Deficiency ratio : <span ng-style="deficiencyStyle">{{generalDeficiencyRatio.toFixed(0)}} GWh</span></span>
         </li>
       </ul>
     </div>
@@ -176,7 +176,7 @@
       <div class="v-m">
         <div class="input-group">
           <span class="input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
-          <input id="solar_surface" type="number" class="form-control" min="0" ng-model="solar_input" ng-change="inputChange()">
+          <input id="solar_surface" type="number" class="form-control" min="0" step="25" ng-model="solar_input" ng-change="inputChange()">
         </div>
         <h5 align="center">m<sup>2</sup></h5>
       </div>
@@ -215,11 +215,16 @@
     <div class="col-md-12">
       <div class="inline-headers">
         <h3>Strategy</h3>
-        <h5>covers <strong>25%</strong> of the deficiency (3543 GWh)</h5>
+        <h5>covers <strong>{{reduction_strategy_cover_percentage.toFixed(1)}}%</strong> of the deficiency ({{reduction_strategy_cover.toFixed(2)}} GWh)</h5>
       </div>
     </div>
   </div>
-  <h4>A reduction of 200 kWh per household.</h4>
+  <div class="form-group">
+    <label><h4>A reduction of
+      <select ng-model="reduction.value" ng-options="v for v in reduction.options" ng-change="selectChange()" class="form-control">
+      </select> kWh per household.</h4>
+    </label>
+  </div><br><br>
 
   <h1>Imports / exports</h1>
   <div class="row">
@@ -245,13 +250,18 @@
     <div class="col-md-12">
       <div class="inline-headers">
         <h3>Strategy</h3>
-        <h5>covers <strong>25%</strong> of the deficiency (3543 GWh)</h5>
+        <h5>covers <strong>{{imports_strategy_cover_percentage.toFixed(1)}}%</strong> of the deficiency ({{imports_strategy_cover.toFixed(2)}} GWh)</h5>
       </div>
     </div>
   </div>
 
-  <h4>Increase winter's imports by 5%</h4>
-  <h4>Reduce summer's exports by 5%</h4>
+  <div class="form-group">
+    <label><h4>Increase year's imports by
+      <input id="imports" type="number" class="form-control" min="0" step="100" ng-model="imports_value" ng-change="importInputChange()">
+      <!--<select ng-model="imports.value" ng-options="v for v in imports.options" ng-change="importSelectChange()" class="form-control">-->
+      GWh.</h4>
+    </label>
+  </div><br><br>
 
 </div>
 <!-- /.container -->

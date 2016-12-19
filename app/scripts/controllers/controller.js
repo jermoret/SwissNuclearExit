@@ -12,6 +12,11 @@ angular.module('swissNuclearExitApp')
     var GWH_UNITY = "GWh";
     var KWH_UNITY = "kWh";
     var RENEWS_LABELS = ["Non-renewable", "Geothermal", "Hydro", "Solar", "Biomass and Biogaz", "Wind", "Wastes"];
+    var NB_SWISS_HOUSEHOLDS = 3400000;
+    var percentColors = [
+      { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
+      { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0xff } },
+      { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
 
     function labelWithGWhAndPercentage(tooltipItem, data) {
       var allData = data.datasets[tooltipItem.datasetIndex].data;
@@ -76,10 +81,55 @@ angular.module('swissNuclearExitApp')
       return values.map(v => v * 100 / sum);
     }
 
+    function computeCoverPercentage(cover) {
+      if($scope.nuclearDeficiencyRatio != 0) {
+        if(cover.constructor === Array) {
+
+        } else {
+          return cover * 100 / ($scope.nuclearDeficiencyRatio * -1);
+        }
+      }
+      return 0;
+    }
+
     function refreshSwissRenewBarPercentage() {
       var newPercentages = computePercentage($scope.renew_pie_data);
       for(var i = 0; i < newPercentages.length; i++) {
         $scope.renew_bar_data[i][0] = newPercentages[i].toFixed(2);
+      }
+    }
+
+    function getColorForPercentage(pct) {
+      for (var i = 1; i < percentColors.length - 1; i++) {
+        if (pct < percentColors[i].pct) {
+          break;
+        }
+      }
+      var lower = percentColors[i - 1];
+      var upper = percentColors[i];
+      var range = upper.pct - lower.pct;
+      var rangePct = (pct - lower.pct) / range;
+      var pctLower = 1 - rangePct;
+      var pctUpper = rangePct;
+      var color = {
+        r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+        g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+        b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+      };
+      return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+    };
+
+    function refreshDeficiencyColor() {
+      var pct;
+      var UPPER_LIMIT = 3000;
+      if($scope.generalDeficiencyRatio < 0) { // Percentage 0 to 0,5 between nuclear deficiency and zero
+        pct = (1 - ($scope.generalDeficiencyRatio * -1) / ($scope.nuclearDeficiencyRatio * -1)) / 2;
+      } else { // Percentage 0,5 to 1 between zero to upper limit
+        pct = 0.5 + $scope.generalDeficiencyRatio / UPPER_LIMIT / 2;
+      }
+
+      if(pct <= 1) {
+        $scope.deficiencyStyle = {"color" : getColorForPercentage(pct)};
       }
     }
 
@@ -144,6 +194,7 @@ angular.module('swissNuclearExitApp')
     });
 
     $scope.default_colors = ['#F7464A','#8C4906','#337AB7','#FCD552','#85CA3A','#ADC9D7','#303030'];
+    $scope.deficiencyStyle = {"color":"white"};
     $scope.nbrShutdownedCentral = 0;
     $scope.generalDeficiencyRatio = 0;
     $scope.nuclearDeficiencyRatio = 0;
@@ -152,40 +203,93 @@ angular.module('swissNuclearExitApp')
     $scope.wind_strategy_cover = 0;
     $scope.solar_strategy_cover_percentage = 0;
     $scope.solar_strategy_cover = 0;
+    $scope.reduction_strategy_cover_percentage = 0;
+    $scope.reduction_strategy_cover = 0;
+    $scope.imports_strategy_cover_percentage = 0;
+    $scope.imports_strategy_cover = 0;
     $scope.wind_input = 0;
     $scope.solar_input = 0;
+    $scope.reduction = {
+      options: [0,100,150,200,250],
+      value: 0
+    };
+    $scope.imports_value = 0;
 
     // Initialize toggles
     $scope.toggle = new Array(true, true, true, true, true);
 
     $scope.toggleChanged = function (central_id) {
+      var central_production = $scope.centrals[central_id].production_GWh;
       if($scope.toggle[central_id]) {
         $scope.nbrShutdownedCentral--;
-        $scope.generalDeficiencyRatio += $scope.centrals[central_id].production_GWh;
+        $scope.generalDeficiencyRatio += central_production;
+        $scope.nuclearDeficiencyRatio += central_production;
       } else {
         $scope.nbrShutdownedCentral++;
-        $scope.generalDeficiencyRatio -= $scope.centrals[central_id].production_GWh;
+        $scope.generalDeficiencyRatio -= central_production;
+        $scope.nuclearDeficiencyRatio -= central_production;
       }
-      $scope.nuclearDeficiencyRatio = $scope.generalDeficiencyRatio;
       $scope.renew_pie_data[0] = $scope.swiss_non_renew_2014 + $scope.nuclearDeficiencyRatio;
       refreshSwissRenewBarPercentage();
+      refreshDeficiencyColor();
     };
 
+    $scope.old_renew_value = 0;
     $scope.inputChange = function () {
       var wind_cover = $scope.wind_input * $scope.wind_anual_production_unit;
       var solar_cover = $scope.solar_input * $scope.solar_anual_production_unit;
-      $scope.generalDeficiencyRatio = $scope.nuclearDeficiencyRatio + wind_cover + solar_cover;
+      $scope.generalDeficiencyRatio -= $scope.old_renew_value;
+      $scope.generalDeficiencyRatio += wind_cover + solar_cover;
       $scope.wind_strategy_cover = wind_cover;
       $scope.solar_strategy_cover = solar_cover;
 
-      if($scope.nuclearDeficiencyRatio != 0) {
-        $scope.wind_strategy_cover_percentage = wind_cover * 100 / ($scope.nuclearDeficiencyRatio * -1);
-        $scope.solar_strategy_cover_percentage = solar_cover * 100 / ($scope.nuclearDeficiencyRatio * -1);
-      }
+      $scope.wind_strategy_cover_percentage = computeCoverPercentage(wind_cover);
+      $scope.solar_strategy_cover_percentage = computeCoverPercentage(solar_cover);
 
       $scope.renew_pie_data[5] = $scope.swiss_wind_2014 + wind_cover;
       $scope.renew_pie_data[3] = $scope.swiss_solar_2014 + solar_cover;
       refreshSwissRenewBarPercentage();
+      $scope.old_renew_value = wind_cover + solar_cover;
+      refreshDeficiencyColor();
+    };
+
+    $scope.old_reduction_value = 0;
+    $scope.old_reduction_kwh = 0;
+    $scope.selectChange = function () {
+      $scope.generalDeficiencyRatio -= $scope.old_reduction_value;
+      var reduction_kwh = $scope.reduction.value;
+      var reduction = NB_SWISS_HOUSEHOLDS * $scope.reduction.value / 1000000;
+      $scope.generalDeficiencyRatio += reduction;
+      $scope.reduction_strategy_cover = reduction;
+      $scope.reduction_strategy_cover_percentage = computeCoverPercentage(reduction);
+      var length = $scope.total_household_cons_data[0].length;
+      $scope.total_household_cons_data[0][length-1] += $scope.old_reduction_value;
+      $scope.total_household_cons_data[0][length-1] -= reduction;
+      $scope.per_house_cons_data[0][0] += $scope.old_reduction_kwh;
+      $scope.per_house_cons_data[0][0] -= reduction_kwh;
+
+      $scope.old_reduction_value = reduction;
+      $scope.old_reduction_kwh = reduction_kwh;
+      refreshDeficiencyColor();
+    };
+
+    $scope.old_import_value = 0;
+    $scope.importInputChange = function () {
+      $scope.generalDeficiencyRatio -= $scope.old_import_value;
+      var imports = $scope.imports_value;
+      $scope.generalDeficiencyRatio += imports;
+      $scope.imports_strategy_cover = imports;
+      $scope.imports_strategy_cover_percentage = computeCoverPercentage(imports);
+
+      $scope.swiss_imp_exp_data[0][0] -= $scope.old_import_value / 2;
+      $scope.swiss_imp_exp_data[0][1] -= $scope.old_import_value / 2;
+      $scope.swiss_imp_exp_data[0][0] += imports / 2;
+      $scope.swiss_imp_exp_data[0][1] += imports / 2;
+      $scope.eu_imp_exp_data[0][0] -= $scope.old_import_value;
+      $scope.eu_imp_exp_data[0][0] += imports;
+
+      $scope.old_import_value = imports;
+      refreshDeficiencyColor();
     };
 
     $scope.renew_pie_options = {
@@ -235,5 +339,13 @@ angular.module('swissNuclearExitApp')
     $scope.total_household_cons_opt = tooltipAndYAxis(GWH_UNITY);
     $scope.per_house_cons_opt = tooltipAndYAxis(KWH_UNITY);
     $scope.swiss_imp_exp_opt = tooltipAndYAxis(GWH_UNITY);
+    $scope.swiss_imp_exp_opt.scales.yAxes[0].scaleLabel = {
+      display: true,
+      labelString: '< exporter ratio              importer ratio >'
+    };
     $scope.eu_imp_exp_opt = tooltipAndYAxis(GWH_UNITY);
+    $scope.eu_imp_exp_opt.scales.yAxes[0].scaleLabel = {
+      display: true,
+      labelString: '< exporter ratio              importer ratio >'
+    };
   });

@@ -87,3 +87,20 @@
 .label-as-badge {
   border-radius: 1em;
 }
+
+
+.form-group label {
+  float: left;
+  text-align: left;
+  font-weight: normal;
+}
+
+.form-group select {
+  display: inline-block;
+  width: auto;
+}
+
+.form-group input {
+  display: inline-block;
+  width: auto;
+}
