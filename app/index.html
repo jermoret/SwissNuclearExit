@@ -75,35 +75,40 @@
       <img src="images/nuclear_central.png" alt="{{centrals[0].name}}" width="96" height="120">
       <h3>{{centrals[0].name}}</h3>
       <h4>{{centrals[0].construction_date}}</h4>
-      <h5>{{centrals[0].net_power_mwe}} MWe</h5>
+      <h5>{{centrals[0].production_GWh}} GWh</h5>
+      <p class="central_production">{{centrals[0].net_power_mwe}} MWe</p>
       <toggle ng-model="toggle[0]" ng-change="toggleChanged(0)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
       <img src="images/nuclear_central.png" alt="{{centrals[1].name}}" width="96" height="120">
       <h3>{{centrals[1].name}}</h3>
       <h4>{{centrals[1].construction_date}}</h4>
-      <h5>{{centrals[1].net_power_mwe}} MWe</h5>
+      <h5>{{centrals[1].production_GWh}} GWh</h5>
+      <p class="central_production">{{centrals[1].net_power_mwe}} MWe</p>
       <toggle ng-model="toggle[1]" ng-change="toggleChanged(1)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
       <img src="images/nuclear_central.png" alt="{{centrals[2].name}}" width="96" height="120">
       <h3>{{centrals[2].name}}</h3>
       <h4>{{centrals[2].construction_date}}</h4>
-      <h5>{{centrals[2].net_power_mwe}} MWe</h5>
+      <h5>{{centrals[2].production_GWh}} GWh</h5>
+      <p class="central_production">{{centrals[2].net_power_mwe}} MWe</p>
       <toggle ng-model="toggle[2]" ng-change="toggleChanged(2)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
       <img src="images/nuclear_central.png" alt="{{centrals[3].name}}" width="96" height="120">
       <h3>{{centrals[3].name}}</h3>
       <h4>{{centrals[3].construction_date}}</h4>
-      <h5>{{centrals[3].net_power_mwe}} MWe</h5>
+      <h5>{{centrals[3].production_GWh}} GWh</h5>
+      <p class="central_production">{{centrals[3].net_power_mwe}} MWe</p>
       <toggle ng-model="toggle[3]" ng-change="toggleChanged(3)" style="android"></toggle>
     </div>
     <div class="col-md-2 nuclear_central_container">
       <img src="images/nuclear_central.png" alt="{{centrals[4].name}}" width="96" height="120">
       <h3>{{centrals[4].name}}</h3>
       <h4>{{centrals[4].construction_date}}</h4>
-      <h5>{{centrals[4].net_power_mwe}} MWe</h5>
+      <h5>{{centrals[4].production_GWh}} GWh</h5>
+      <p class="central_production">{{centrals[4].net_power_mwe}} MWe</p>
       <toggle ng-model="toggle[4]" ng-change="toggleChanged(4)" style="android"></toggle>
     </div>
   </div>
@@ -152,9 +157,9 @@
     <div class="col-md-7 height-align">
       <div class="v-m">
         <h4>Some stats</h4>
+        <p><img src="images/household.png" alt="Household" height="30" width="36"> Would supply <strong>{{wind_households_supply.toFixed(1)}}</strong> Swiss households.</p>
         <p>The confederation's target for 2050 is 7% of consumption or 4000 GWh.</p>
         <p>The intermediate objective of confederation for 2020 is 600 GWh.</p>
-        <p>A standard wind turbine (2 to 3 MW) supplies 1000 to 1,700 Swiss households.</p>
       </div>
     </div>
   </div>
@@ -170,21 +175,22 @@
 
   <div class="row">
     <div class="col-md-2">
-      <img src="images/solar.jpg" alt="Wind turbine" height="175" width="166">
+      <img src="images/solar.jpg" alt="Solar panel" height="175" width="166">
     </div>
     <div class="col-md-3 height-align">
       <div class="v-m">
         <div class="input-group">
           <span class="input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
           <input id="solar_surface" type="number" class="form-control" min="0" step="25" ng-model="solar_input" ng-change="inputChange()">
+          <span class="input-group-addon">m<sup>2</sup></span>
         </div>
-        <h5 align="center">m<sup>2</sup></h5>
+        <p align="center"><img src="images/information.png" alt="Information" height="30" width="30"> Equivalent to <strong>{{equivalent_soccer_fields.toFixed(1)}}</strong> soccer fields.</p>
       </div>
     </div>
     <div class="col-md-7 height-align">
       <div class="v-m">
         <h4>Some stats</h4>
-        <p>25 m<sup>2</sup> cover the needs of a Swiss household.</p>
+        <p><img src="images/household.png" alt="Household" height="30" width="36"> Would supply <strong>{{solar_households_supply.toFixed(1)}}</strong> Swiss households.</p>
         <p>10,000 CHF the 25 m<sup>2</sup>.</p>
         <p>Lifetime > 30 years.</p>
       </div>
@@ -260,15 +266,21 @@
       <input id="imports" type="number" class="form-control" min="0" step="100" ng-model="imports_value" ng-change="importInputChange()">
       <!--<select ng-model="imports.value" ng-options="v for v in imports.options" ng-change="importSelectChange()" class="form-control">-->
       GWh.</h4>
+      <p><img src="images/information.png" alt="Information" height="30" width="30"> Equivalent to <strong>{{equivalent_beznau_1.toFixed(1)}}</strong>x the production of Beznau I.</p>
     </label>
-  </div><br><br>
+  </div><br><br><br><br>
+  <h1>Summary of strategies</h1>
+  <canvas id="base" class="chart chart-horizontalBar" chart-type="horizontalBar"
+          chart-data="summary_data" chart-options="summary_options" height="50"
+          chart-series="summary_series" chart-dataset-override="summary_over"
+          chart-colors="summary_colors">
+  </canvas>
 
 </div>
 <!-- /.container -->
 
 <!-- jQuery Version 1.11.1 -->
 <script src="../bower_components/angular/angular.min.js"></script>
-<script src="../bower_components/angular-google-chart/ng-google-chart.min.js"></script>
 <script src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
 <script src="../bower_components/chart.js/dist/Chart.min.js"></script>
 <script src="../bower_components/angular-chart.js/dist/angular-chart.min.js"></script>

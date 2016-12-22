@@ -241,14 +241,21 @@
 		"solar":
 		{
 			"unit": "m2",
-			"annual_production_kWh": 160
+			"annual_production_kWh": 160,
+      "household_supply_unity": 0.04
 		},
 		"wind":
 		{
 			"unit": "unit",
-			"annual_production_kWh": 6800000
+			"annual_production_kWh": 6800000,
+      "household_supply_unity": 1700
 		}
 	},
+
+  "equivalent":
+  {
+    "soccer_field_m2":7266
+  },
 
 	"swiss_households_consumption_GWh":
 	[

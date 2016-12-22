@@ -133,6 +133,16 @@ angular.module('swissNuclearExitApp')
       }
     }
 
+    function refreshSummaryGraph() {
+      $scope.summary_data = [
+        [$scope.wind_strategy_cover_percentage],
+        [$scope.solar_strategy_cover_percentage],
+        [$scope.reduction_strategy_cover_percentage],
+        [$scope.imports_strategy_cover_percentage]
+      ];
+      $scope.summary_options.scales.xAxes[0].ticks.max = 100;
+    }
+
 
     $scope.$on('create', function (event, chart) {
       //document.getElementById('pie_chart_legend').innerHTML = chart.generateLegend();
@@ -191,9 +201,15 @@ angular.module('swissNuclearExitApp')
 
       $scope.wind_anual_production_unit = response.data.renewables_energies.wind.annual_production_kWh / 1000000;
       $scope.solar_anual_production_unit = response.data.renewables_energies.solar.annual_production_kWh / 1000000;
+
+      $scope.wind_households_supply_unity = response.data.renewables_energies.wind.household_supply_unity;
+      $scope.solar_households_supply_unity = response.data.renewables_energies.solar.household_supply_unity;
+
+      $scope.soccer_fields_size_m2 = response.data.equivalent.soccer_field_m2;
     });
 
     $scope.default_colors = ['#F7464A','#8C4906','#337AB7','#FCD552','#85CA3A','#ADC9D7','#303030'];
+    $scope.summary_colors = ['#ADC9D7','#FCD552','#85CA3A','#F7464A'];
     $scope.deficiencyStyle = {"color":"white"};
     $scope.nbrShutdownedCentral = 0;
     $scope.generalDeficiencyRatio = 0;
@@ -209,6 +225,11 @@ angular.module('swissNuclearExitApp')
     $scope.imports_strategy_cover = 0;
     $scope.wind_input = 0;
     $scope.solar_input = 0;
+    $scope.wind_households_supply = 0;
+    $scope.solar_households_supply = 0;
+    $scope.equivalent_soccer_fields = 0;
+    $scope.equivalent_beznau_1 = 0;
+    $scope.summary_series = ["Wind strategy","Solar strategy","Households consumption reduction","Imports strategy"];
     $scope.reduction = {
       options: [0,100,150,200,250],
       value: 0
@@ -246,11 +267,17 @@ angular.module('swissNuclearExitApp')
       $scope.wind_strategy_cover_percentage = computeCoverPercentage(wind_cover);
       $scope.solar_strategy_cover_percentage = computeCoverPercentage(solar_cover);
 
+      $scope.wind_households_supply = $scope.wind_input * $scope.wind_households_supply_unity;
+      $scope.solar_households_supply = $scope.solar_input * $scope.solar_households_supply_unity;
+
+      $scope.equivalent_soccer_fields = $scope.solar_input / $scope.soccer_fields_size_m2;
+
       $scope.renew_pie_data[5] = $scope.swiss_wind_2014 + wind_cover;
       $scope.renew_pie_data[3] = $scope.swiss_solar_2014 + solar_cover;
       refreshSwissRenewBarPercentage();
       $scope.old_renew_value = wind_cover + solar_cover;
       refreshDeficiencyColor();
+      refreshSummaryGraph();
     };
 
     $scope.old_reduction_value = 0;
@@ -271,6 +298,7 @@ angular.module('swissNuclearExitApp')
       $scope.old_reduction_value = reduction;
       $scope.old_reduction_kwh = reduction_kwh;
       refreshDeficiencyColor();
+      refreshSummaryGraph();
     };
 
     $scope.old_import_value = 0;
@@ -288,8 +316,11 @@ angular.module('swissNuclearExitApp')
       $scope.eu_imp_exp_data[0][0] -= $scope.old_import_value;
       $scope.eu_imp_exp_data[0][0] += imports;
 
+      $scope.equivalent_beznau_1 = imports / $scope.centrals[0].production_GWh;
+
       $scope.old_import_value = imports;
       refreshDeficiencyColor();
+      refreshSummaryGraph();
     };
 
     $scope.renew_pie_options = {
@@ -348,4 +379,36 @@ angular.module('swissNuclearExitApp')
       display: true,
       labelString: '< exporter ratio              importer ratio >'
     };
+
+    $scope.summary_options = {
+      legend: {
+        display: true,
+        position: "bottom"
+      },
+      scales: {
+        xAxes: [{
+          stacked: true,
+          ticks: {
+            callback: function(value, index, values) {
+              return value + ' %';
+            }
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return data.datasets[tooltipItem.datasetIndex].label + ": " + tooltipItem.xLabel.toFixed(1) + ' %';
+          }
+        }
+      }
+    };
+    $scope.summary_over = [];
+    $scope.summary_colors.forEach(function (element) {
+      $scope.summary_over.push({backgroundColor: element, borderColor: element})
+    });
+    refreshSummaryGraph();
   });
