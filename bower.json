@@ -4,7 +4,6 @@
   "dependencies": {
     "angular": "latest",
     "bootstrap": "^3.2.0",
-    "angular-google-chart": "^0.1.0",
     "angular-bootstrap-toggle": "^0.1.2"
   },
   "devDependencies": {

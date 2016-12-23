@@ -13,6 +13,7 @@
 
   <!-- Bootstrap Core CSS -->
   <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles/footer.css" rel="stylesheet">
   <link href="styles/main.css" rel="stylesheet">
   <link href="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css" rel="stylesheet">
 
@@ -136,7 +137,7 @@
     <div class="col-md-12">
       <div class="inline-headers">
         <h3>Wind strategy</h3>
-        <h5>covers <strong>{{wind_strategy_cover_percentage.toFixed(1)}}%</strong> of the deficiency ({{wind_strategy_cover.toFixed(2)}} GWh)</h5>
+        <h5>covers <strong>{{strategy[0].percentage.toFixed(1)}}%</strong> of the deficiency ({{strategy[0].cover.toFixed(2)}} GWh)</h5>
       </div>
     </div>
   </div>
@@ -168,7 +169,7 @@
     <div class="col-md-12">
       <div class="inline-headers">
         <h3>Solar strategy</h3>
-        <h5>covers <strong>{{solar_strategy_cover_percentage.toFixed(1)}}%</strong> of the deficiency ({{solar_strategy_cover.toFixed(2)}} GWh)</h5>
+        <h5>covers <strong>{{strategy[1].percentage.toFixed(1)}}%</strong> of the deficiency ({{strategy[1].cover.toFixed(2)}} GWh)</h5>
       </div>
     </div>
   </div>
@@ -221,16 +222,18 @@
     <div class="col-md-12">
       <div class="inline-headers">
         <h3>Strategy</h3>
-        <h5>covers <strong>{{reduction_strategy_cover_percentage.toFixed(1)}}%</strong> of the deficiency ({{reduction_strategy_cover.toFixed(2)}} GWh)</h5>
+        <h5>covers <strong>{{strategy[2].percentage.toFixed(1)}}%</strong> of the deficiency ({{strategy[2].cover.toFixed(2)}} GWh)</h5>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label><h4>A reduction of
-      <select ng-model="reduction.value" ng-options="v for v in reduction.options" ng-change="selectChange()" class="form-control">
-      </select> kWh per household.</h4>
+    <label><h4>Decrease household consumption by
+      <input id="household_red" type="number" class="form-control" min="0" step="1" ng-model="reduction_value" ng-change="reductionInputChange()">
+      %.</h4>
+      <p><img src="images/information.png" alt="Information" height="30" width="30"> Equivalent to the replacement of <strong>{{equivalent_bulbs_replacement.toFixed(1)}}</strong> halogen bulbs
+        <img src="images/b.png" alt="Information" height="20"> by led bulbs <img src="images/a++.png" alt="Information" height="20"> lit 4 hours a day over a year (800 lumens).</p>
     </label>
-  </div><br><br>
+  </div><br><br><br><br>
 
   <h1>Imports / exports</h1>
   <div class="row">
@@ -256,7 +259,7 @@
     <div class="col-md-12">
       <div class="inline-headers">
         <h3>Strategy</h3>
-        <h5>covers <strong>{{imports_strategy_cover_percentage.toFixed(1)}}%</strong> of the deficiency ({{imports_strategy_cover.toFixed(2)}} GWh)</h5>
+        <h5>covers <strong>{{strategy[3].percentage.toFixed(1)}}%</strong> of the deficiency ({{strategy[3].cover.toFixed(2)}} GWh)</h5>
       </div>
     </div>
   </div>
@@ -269,7 +272,7 @@
       <p><img src="images/information.png" alt="Information" height="30" width="30"> Equivalent to <strong>{{equivalent_beznau_1.toFixed(1)}}</strong>x the production of Beznau I.</p>
     </label>
   </div><br><br><br><br>
-  <h1>Summary of strategies</h1>
+  <h1>Summary of deficiency coverage</h1>
   <canvas id="base" class="chart chart-horizontalBar" chart-type="horizontalBar"
           chart-data="summary_data" chart-options="summary_options" height="50"
           chart-series="summary_series" chart-dataset-override="summary_over"
@@ -278,6 +281,16 @@
 
 </div>
 <!-- /.container -->
+
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">IV course project - Stats until 2014 from <a href="http://www.bfe.admin.ch/index.html?lang=fr">OFEN</a>,
+      <a href="http://ec.europa.eu/eurostat/fr/home">Eurostat</a>,
+      <a href="http://www.swissolar.ch/fr/">Swissolar</a> and
+      <a href="http://www.suisse-eole.ch/fr/energie-eolienne/statistiques/">SuisseEole</a>.
+    </p>
+  </div>
+</footer>
 
 <!-- jQuery Version 1.11.1 -->
 <script src="../bower_components/angular/angular.min.js"></script>
@@ -291,9 +304,7 @@
 
 <!-- Custom scripts -->
 <script src="scripts/app.js"></script>
-<script src="scripts/directives/renewableenerg.js"></script>
 <script src="scripts/controllers/controller.js"></script>
-<script src="scripts/directives/nuclearcentral.js"></script>
 
 </body>
 

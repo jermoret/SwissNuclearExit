@@ -295,5 +295,11 @@
 		{"name":"Mühleberg", "net_power_mwe":373, "construction_date":1971, "production_GWh":3027},
 		{"name":"Gösgen", "net_power_mwe":970, "construction_date":1979, "production_GWh":7972},
 		{"name":"Leibstadt", "net_power_mwe":1165, "construction_date":1984, "production_GWh":9458}
-	]
+	],
+
+  "bulbs":
+    [
+      {"type":"led", "eco_class":"A++", "power":7},
+      {"type":"halo", "eco_class":"B", "power":40}
+    ]
 }
