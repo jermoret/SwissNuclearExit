@@ -41,7 +41,9 @@ Quelques tests utilisateurs ont été effectuées afin d'évaluer l'intuitivité
 
 ## Améliorations possibles
 
-Une barre de navigation verticale pourrait être installée pour faciliter la navigation au sein des différentes sections.
+- Corriger les défauts découverts avec les tests utilisateurs. 
+- Supprimer ou trouver un meilleur graphique pour la consommation des ménages européens.
+- Une barre de navigation verticale pourrait être installée pour faciliter la navigation au sein des différentes sections.
 
 ## Exécution
 
