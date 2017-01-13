@@ -1,6 +1,6 @@
 # SwissNuclearExit
 
-Ce projet a été réalisé au sein du cours *Visualisation de l'Information* du Master Of Science In Engineering à l'HES-SO.
+Ce projet a été réalisé au sein du cours *Visualisation de l'Information* du Master Of Science In Engineering de l'HES-SO.
 
 ## Intention
 
